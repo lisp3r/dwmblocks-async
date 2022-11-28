@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ $(pulsemixer --get-mute) = 1 ]; then
+	echo "婢"
+else
+	# fix it
+	vol=$(pulsemixer --get-volume | awk '{print $1}')
+	if [ "$vol" -gt 70 ]; then
+		vol_icon=" "
+	elif [ "$vol" -gt 40 ]; then
+		vol_icon="墳 "
+	elif [ "$vol" -gt 10 ]; then
+		vol_icon=" "
+	else
+		vol_icon="奄 "
+	fi
+
+	# display "$icon$vol%"
+	echo "$vol_icon$vol%"
+fi
